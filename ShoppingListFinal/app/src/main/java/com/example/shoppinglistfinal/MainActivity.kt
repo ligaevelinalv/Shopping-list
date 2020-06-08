@@ -40,25 +40,16 @@ class MainActivity : AppCompatActivity() {
             dial.onPositive = {
                 finalList.remove(it)
                 adapter.notifyDataSetChanged()
-
             }
-            // You can show popup instead and then delete it
-            // You have an item to delete 'it'
-
-//                finalList.remove(it)
-
         }
-
-
     }
-
 
 
     private fun generateList(): MutableList<ListItem> {
         val list = ArrayList<ListItem>()
-        list += ListItem("Chicken flavored ramen")
-        list += ListItem("Green tea")
-        list += ListItem("HDMI cable")
+//        list += ListItem("Chicken flavored ramen")
+//        list += ListItem("Green tea")
+//        list += ListItem("HDMI cable")
 
         return list
     }
@@ -74,14 +65,4 @@ class MainActivity : AppCompatActivity() {
         input_field.text.clear()
 
     }
-
-
-    fun deleteItem(position: Int) {
-
-//        finalList.removeAt(position)
-
-//        Log.i("error", "${finalList[position]}")
-
-    }
-
 }
