@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ShoppingListFinal</string>
+    <string name="shopping_list_text">Shopping List</string>
+    <string name="input_hint">Enter item</string>
+    <string name="button_text">ADD</string>
+</resources>
