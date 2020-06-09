@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -13,10 +14,12 @@ import kotlinx.android.synthetic.main.list_item.view.*
 class ListAdapter(private val listOfItems: List<ListItem>): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     var onItemLongClick: ((item: ListItem) -> Unit)? = null
+    var onCheckBoxClick: ((item: ListItem) -> Unit)? = null
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView1: TextView = itemView.text_view_1
         var cardView: CardView = itemView.item_card_view
+        val check: CheckBox = itemView.checkBox
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -27,6 +30,8 @@ class ListAdapter(private val listOfItems: List<ListItem>): RecyclerView.Adapter
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val currentItem = listOfItems[position]
 
+        holder.check.isChecked = currentItem.ischecked
+
         holder.textView1.text = currentItem.text1
 
         holder.cardView.setOnLongClickListener {
@@ -34,6 +39,10 @@ class ListAdapter(private val listOfItems: List<ListItem>): RecyclerView.Adapter
             onItemLongClick?.invoke(currentItem)
 
             true
+        }
+
+        holder.check.setOnClickListener {
+            onCheckBoxClick?.invoke(currentItem)
         }
 
     }

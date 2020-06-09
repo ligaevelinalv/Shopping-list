@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.list_item.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +44,17 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         }
+
+        adapter.onCheckBoxClick = {
+            if (!it.ischecked){
+                it.ischecked = true
+            }
+
+            else {
+                it.ischecked = false
+            }
+
+        }
     }
 
 
@@ -56,7 +69,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertItem(view: View) {
         var inputField = input_field as EditText
-        val newItem = ListItem(inputField.text.toString())
+        val newItem = ListItem(inputField.text.toString(), false)
+
 
         finalList.add(newItem)
 
