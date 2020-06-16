@@ -11,8 +11,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class ListAdapter(private val listOfItems: List<ListItem>): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
+    var listOfItems = listOf<ListItem>()
     var onItemLongClick: ((item: ListItem) -> Unit)? = null
     var onCheckBoxClick: ((item: ListItem) -> Unit)? = null
 
@@ -41,10 +42,10 @@ class ListAdapter(private val listOfItems: List<ListItem>): RecyclerView.Adapter
             true
         }
 
-        holder.check.setOnClickListener {
+        holder.check.setOnCheckedChangeListener { _, isChecked ->
+            currentItem.ischecked = isChecked
             onCheckBoxClick?.invoke(currentItem)
         }
-
     }
 
     override fun getItemCount() = listOfItems.size

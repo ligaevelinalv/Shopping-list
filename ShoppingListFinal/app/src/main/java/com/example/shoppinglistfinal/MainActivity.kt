@@ -10,22 +10,32 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var adapter: ListAdapter
+//    private var finalList: MutableList<ListItem> = generateList()
 
-    private var finalList: MutableList<ListItem> = generateList()
+    val shoppingListViewModel by lazy {
+        ViewModelProvider(this).get(ShoppingListViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        shoppingListViewModel.allItems.observe(this, Observer {
+            adapter.listOfItems = it
+            adapter.notifyDataSetChanged()
 
+        })
 
-        val adapter = ListAdapter(finalList)
+        adapter = ListAdapter()
         recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
@@ -40,28 +50,31 @@ class MainActivity : AppCompatActivity() {
         adapter.onItemLongClick = {
 
             var dial = Dialogue()
-            dial.show(supportFragmentManager, "missiles")
+            dial.show(supportFragmentManager, "")
             dial.onPositive = {
-                finalList.remove(it)
+                shoppingListViewModel.deleteItem(it)
+//                finalList.remove(it)
                 adapter.notifyDataSetChanged()
             }
         }
 
         adapter.onCheckBoxClick = {
-            if (!it.ischecked){
-                it.ischecked = true
-            }
-
-            else {
-                it.ischecked = false
-            }
-
+//            if (!it.ischecked) {
+//                it.ischecked = true
+//            }
+//            else {
+//                it.ischecked = false
+//            }
+            shoppingListViewModel.updateItem(it)
         }
     }
 
 
     private fun generateList(): MutableList<ListItem> {
         val list = ArrayList<ListItem>()
+
+//        make pre-populated list if necessary
+
 //        list += ListItem("Chicken flavored ramen")
 //        list += ListItem("Green tea")
 //        list += ListItem("HDMI cable")
@@ -71,16 +84,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertItem(view: View) {
         var inputField = input_field as EditText
-        val newItem = ListItem(inputField.text.toString(), false)
+        val newItem = ListItem(text1 = inputField.text.toString(), ischecked = false)
 
+        shoppingListViewModel.insertItem(newItem)
 
-        finalList.add(newItem)
+//        finalList.add(newItem)
+
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
         input_field.text.clear()
 
     }
-
-    //branchtest
 }
