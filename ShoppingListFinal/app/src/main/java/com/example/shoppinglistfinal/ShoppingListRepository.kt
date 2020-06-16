@@ -11,8 +11,6 @@ class ShoppingListRepository (private val shoppingListDao: ShoppingListDao) {
         shoppingListDao.insertItem(item)
     }
 
-//    suspend fun deleteAll()
-
     suspend fun deleteItem(item: ListItem) {
         shoppingListDao.deleteItem(item)
     }

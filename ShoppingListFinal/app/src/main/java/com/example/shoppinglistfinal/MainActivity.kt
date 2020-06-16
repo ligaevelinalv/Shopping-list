@@ -53,33 +53,13 @@ class MainActivity : AppCompatActivity() {
             dial.show(supportFragmentManager, "")
             dial.onPositive = {
                 shoppingListViewModel.deleteItem(it)
-//                finalList.remove(it)
                 adapter.notifyDataSetChanged()
             }
         }
 
         adapter.onCheckBoxClick = {
-//            if (!it.ischecked) {
-//                it.ischecked = true
-//            }
-//            else {
-//                it.ischecked = false
-//            }
             shoppingListViewModel.updateItem(it)
         }
-    }
-
-
-    private fun generateList(): MutableList<ListItem> {
-        val list = ArrayList<ListItem>()
-
-//        make pre-populated list if necessary
-
-//        list += ListItem("Chicken flavored ramen")
-//        list += ListItem("Green tea")
-//        list += ListItem("HDMI cable")
-
-        return list
     }
 
     private fun insertItem(view: View) {
@@ -87,9 +67,6 @@ class MainActivity : AppCompatActivity() {
         val newItem = ListItem(text1 = inputField.text.toString(), ischecked = false)
 
         shoppingListViewModel.insertItem(newItem)
-
-//        finalList.add(newItem)
-
 
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)

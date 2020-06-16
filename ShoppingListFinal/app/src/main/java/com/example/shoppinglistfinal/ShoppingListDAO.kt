@@ -13,10 +13,6 @@ interface  ShoppingListDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertItem(item: ListItem)
 
-//    extra functionality
-//    @Query("DELETE FROM shopping_list_table")
-//    suspend fun deleteAll()
-
     @Delete
     suspend fun deleteItem(item: ListItem)
 
