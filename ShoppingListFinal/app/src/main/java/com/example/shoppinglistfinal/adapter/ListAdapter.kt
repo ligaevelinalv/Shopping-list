@@ -1,14 +1,13 @@
-package com.example.shoppinglistfinal
+package com.example.shoppinglistfinal.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shoppinglistfinal.R
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
@@ -25,7 +24,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        return ListViewHolder(itemView)
+        return ListViewHolder(
+            itemView
+        )
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -41,6 +42,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
             true
         }
+
+
 
         holder.check.setOnCheckedChangeListener { _, isChecked ->
             currentItem.ischecked = isChecked

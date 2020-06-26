@@ -3,4 +3,5 @@
     <string name="shopping_list_text">Shopping List</string>
     <string name="input_hint">Enter item</string>
     <string name="button_text">ADD</string>
+    <string name="list_item_example">Line 1</string>
 </resources>

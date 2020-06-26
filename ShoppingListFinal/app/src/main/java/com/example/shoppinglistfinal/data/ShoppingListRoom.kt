@@ -1,12 +1,13 @@
-package com.example.shoppinglistfinal
+package com.example.shoppinglistfinal.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.shoppinglistfinal.adapter.ListItem
 
-@Database(entities = arrayOf(ListItem::class), version = 1, exportSchema = false)
-public abstract class ShoppingListRoomDatabase: RoomDatabase() {
+@Database(entities = [ListItem::class], version = 1, exportSchema = false)
+abstract class ShoppingListRoomDatabase: RoomDatabase() {
     abstract fun shoppingListDao(): ShoppingListDao
 
     companion object {
@@ -14,7 +15,8 @@ public abstract class ShoppingListRoomDatabase: RoomDatabase() {
         private var INSTANCE: ShoppingListRoomDatabase? = null
 
         fun getDatabase(context: Context): ShoppingListRoomDatabase {
-            val tempInstance = INSTANCE
+            val tempInstance =
+                INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

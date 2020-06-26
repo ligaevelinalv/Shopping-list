@@ -1,8 +1,7 @@
-package com.example.shoppinglistfinal
+package com.example.shoppinglistfinal.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Update
+import com.example.shoppinglistfinal.adapter.ListItem
 
 class ShoppingListRepository (private val shoppingListDao: ShoppingListDao) {
     val allItems: LiveData<MutableList<ListItem>> = shoppingListDao.getAllItems()

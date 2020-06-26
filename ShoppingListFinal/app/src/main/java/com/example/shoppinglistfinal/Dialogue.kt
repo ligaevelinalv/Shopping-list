@@ -13,7 +13,6 @@ class Dialogue : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             builder.setMessage("Delete item?")
                 .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->

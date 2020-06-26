@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.shoppinglistfinal.adapter.ListItem
+import com.example.shoppinglistfinal.data.ShoppingListRepository
+import com.example.shoppinglistfinal.data.ShoppingListRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -12,8 +15,10 @@ class ShoppingListViewModel(application: Application): AndroidViewModel(applicat
     val allItems: LiveData<MutableList<ListItem>>
 
     init {
-        val ShoppingListDao = ShoppingListRoomDatabase.getDatabase(application).shoppingListDao()
-        repository = ShoppingListRepository(ShoppingListDao)
+        val shoppingListDao = ShoppingListRoomDatabase.getDatabase(application).shoppingListDao()
+        repository = ShoppingListRepository(
+            shoppingListDao
+        )
         allItems = repository.allItems
     }
 

@@ -1,8 +1,8 @@
-package com.example.shoppinglistfinal
+package com.example.shoppinglistfinal.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.shoppinglistfinal.adapter.ListItem
 
 @Dao
 interface  ShoppingListDao {
